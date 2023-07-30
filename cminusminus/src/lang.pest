@@ -1,0 +1,12 @@
+WHITESPACE = _{ " " }
+quote = _{ "\"" }
+program = { assignment | print | syscall }
+
+
+var_name = { ASCII_ALPHA+ }
+string = { quote ~ (ASCII_ALPHA | "/")+ ~ quote }
+int = { ASCII_DIGIT+ }
+var_type = { string | int }
+assignment = { var_name ~ "=" ~ var_type }
+print = { "print" ~ "(" ~ var_name ~ ")" }
+syscall = { "syscall" ~ ":" ~ int ~ "(" ~ ( var_name ~ "," )* ~ var_name ~ ")" }
